@@ -1,9 +1,3 @@
-'''
-with open('01-Light_video00001.txt', 'r') as f:
-    l = [[int(num) for num in line.split(' ')] for line in f]
-print(l)
-'''
-
 import numpy as np
 
 
@@ -24,30 +18,7 @@ def polygon_area(x,y):
 
 def polyarea(x,y):
     return 0.5*np.abs(np.dot(x,np.roll(y,1))-np.dot(y,np.roll(x,1)))
-'''
-def bb_intersection_over_union(boxA, boxB):
-	# determine the (x, y)-coordinates of the intersection rectangle
-	xA = max(boxA[0], boxB[0])
-	yA = max(boxA[1], boxB[1])
-	xB = min(boxA[2], boxB[2])
-	yB = min(boxA[3], boxB[3])
- 
-	# compute the area of intersection rectangle
-	interArea = max(0, xB - xA + 1) * max(0, yB - yA + 1)
- 
-	# compute the area of both the prediction and ground-truth
-	# rectangles
-	boxAArea = (boxA[2] - boxA[0] + 1) * (boxA[3] - boxA[1] + 1)
-	boxBArea = (boxB[2] - boxB[0] + 1) * (boxB[3] - boxB[1] + 1)
- 
-	# compute the intersection over union by taking the intersection
-	# area and dividing it by the sum of prediction + ground-truth
-	# areas - the interesection area
-	iou = interArea / float(boxAArea + boxBArea - interArea)
- 
-	# return the intersection over union value
-	return iou
-'''
+
 
 def bb_intersection_over_union(annPoly_x, annPoly_y, trackedPoly_x, trackedPoly_y):
 	# determine the (x, y)-coordinates of the intersection rectangle
@@ -277,7 +248,7 @@ overlaps = errors[:, 1]
 FN = np.count_nonzero(np.isnan(overlaps)) #no track box is ass. with a gt
 TP = np.count_nonzero(overlaps >= theta)
 FP = np.count_nonzero(overlaps < theta) # a track box is not ass. with a gt
-FN = FN + FP # cvpr12 formula [1]
+FN = FN + FP # cvpr12 formula
 P = TP / (TP + FP)
 R = TP / (TP + FN)
 fscore = (2*P*R)/(P+R);
@@ -328,29 +299,3 @@ if len(centroid_normalized_distance) >= 1:
 #PBM
 pbm = (1/NoAnnFrames) * sum(pbm_list)
 print("PBM: " + str(pbm))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
