@@ -241,6 +241,8 @@ for i in range(NoAnnFrames):
     #print(errors)
     #print('----------------------------------------')
     
+    
+#FSCORE 
 theta = 0.5
 overlaps = errors[:, 1]
 #errors = sharedArea / (annArea + trackedArea - sharedArea)
@@ -260,8 +262,8 @@ print('Fscore: ' + str(fscore))
 
 p_i = area_based_errors[:, 1]
 r_i = area_based_errors[:, 2]
-#area_based_f1 =
-    
+
+#AREA BASED F1
 p_r_mul = p_i * r_i
 p_r_sum = p_i + r_i
 p_r_2 = 2 * (p_r_mul/p_r_sum)
@@ -269,11 +271,12 @@ p_r_2_sum = np.sum(p_r_2)
 area_based_f1 = (1/NoAnnFrames) * p_r_2_sum
 print('Area Based F-score: ' + str(area_based_f1))
 
-
+#OTA
 ota = 1 - ((FN+FP)/NoAnnFrames)
 print('OTA: '+ str(ota))
 
 Ms = 0
+
 #OTP
 if (len(otp_errors) >= 1):
     sum_otp_errors = np.sum(otp_errors)
@@ -290,7 +293,6 @@ ata = (1/NoAnnFrames) * intersection_by_union_sum
 print('ATA: ' + str(ata))
 
 #Deviation
-
 if len(centroid_normalized_distance) >= 1:
         
     deviation = 1 - (sum(centroid_normalized_distance)/abs(Ms))
